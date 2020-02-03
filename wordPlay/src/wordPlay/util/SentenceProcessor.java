@@ -1,66 +1,76 @@
 package wordPlay.util;
 
+/**
+ * @author Milind This class is to process sentence
+ *
+ */
 public class SentenceProcessor {
 
+	/**
+	 * Basically this method for to process sentence. For example : it will break
+	 * one sentence into 2 if there is new line in sentence and does processing like
+	 * reversing
+	 * 
+	 * @param sentence incoming sentence which contains sentence till period
+	 * @return it will return sentence with revered words in it
+	 */
 	public String processSentence(String sentence) {
 		String reversedSentence = "";
 		MatricCalculator matricCalculator = new MatricCalculator();
 		matricCalculator.sentenceCounter();
 		if (sentence.contains("\r\n") || sentence.contains("\n")) {
-			// cCount++;
 			String[] list = null;
 			if (sentence.contains("\r\n"))
 				list = sentence.split("\r\n");
 			else if (sentence.contains("\n")) {
 				list = sentence.split("\n");
 			}
+			int senCnt = 0;
+			for (String sen : list) {
+				matricCalculator.matrixCalProcess(sen);
+				reversedSentence += getReversedSentence(sen);
 
-			String sentence1 = getReversedSentence(list[0]);
-
-			matricCalculator.matrixCalProcess(list[0]);
-			String sentence2 = getReversedSentence(list[1]);
-			matricCalculator.matrixCalProcess(list[1]);
-			reversedSentence = sentence1 + "\n" + sentence2;
-			/// writer.write(prin + "\n" + prin2);
-			// System.out.print(prin + "\n" + prin2);
-			/// abc = "";
+				if (senCnt < list.length - 1) {
+					reversedSentence += "\n";
+				}
+				senCnt++;
+			}
 		} else {
 			matricCalculator.matrixCalProcess(sentence);
 			reversedSentence = getReversedSentence(sentence);
-			// writer.write(prin);
-			// System.out.print(prin);
-			// abc = "";
 		}
 		return reversedSentence;
 	}
 
+	/**
+	 * @param sentence incoming sentence from process sentence method
+	 * @return it will return sentence with words reversed in it
+	 */
 	public String getReversedSentence(String sentence) {
-		// MatricCalculator matricCalculator = new MatricCalculator();
-		// charCount(sentence);
 		String words[] = sentence.split(" ");
-		// countChar += s.length();
-		/// countWord += temp.length;
+
 		String reversedStr = "";
 		for (int i = 0; i < words.length; i++) {
 			String word = words[i];
 			String temp = "";
 			if (word.contentEquals("")) {
-				// countWord -= 1;
 				continue;
 			}
 			temp = reverseWord(word);
-			// longestWord(word);
-			// storeWordsInMap(word);
+
 			if (temp.length() != 0 && temp.charAt(0) == '.') {
 				temp = temp.substring(1) + '.';
 			}
 			reversedStr += temp + " ";
-			// reversedStr+= (i < words.length-1)? temp + " ":temp;
 		}
 		return reversedStr;
 
 	}
 
+	/**
+	 * @param word incoming word
+	 * @return it will return reverse of word
+	 */
 	private static String reverseWord(String word) {
 		String reversedWord = "";
 		for (int j = word.length() - 1; j >= 0; j--) {
@@ -68,6 +78,11 @@ public class SentenceProcessor {
 			reversedWord = reversedWord + word.charAt(j);
 		}
 		return reversedWord;
+	}
+
+	@Override
+	public String toString() {
+		return "SentenceProcessor []";
 	}
 
 }

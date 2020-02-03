@@ -12,19 +12,27 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 	public Results() {
 	}
 
+	/**
+	 * @param fName incoming file name this method will open fName file if not
+	 *              present then it will create new file with name fName
+	 */
 	@Override
 	public void fileOpen(String fName) {
-		// String fileName = "C:\\Users\\Anand\\Pictures\\DP\\" + fName;
 		file = new File(fName);
 		try {
 			fileWriter = new BufferedWriter(new FileWriter(file));
 
 		} catch (IOException e) { // TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(0);
 		}
 
 	}
 
+	/**
+	 * Closes the stream and releases any system resources associated with
+	 * fileWriter.
+	 */
 	@Override
 	public void fileClose() {
 		try {
@@ -35,6 +43,9 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 		}
 	}
 
+	/**
+	 * @param s s is sentence which will be written to output file.
+	 */
 	@Override
 	public void writeToFile(String s) {
 
@@ -43,18 +54,21 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(0);
 		}
 
 	}
 
+	/**
+	 * this method is to write AVG_NUMBER_WORDS_PER_SENTENCE ,
+	 * AVG_NUM_CHARS_PER_SENTENCE, MAX_FREQ_WORD and LONGEST_WORD to metrics output
+	 * file
+	 */
 	@Override
 	public void writeToFile() {
 		MatricCalculator matricCalculator = new MatricCalculator();
-//System.out.println(matricCalculator.getTotalSenCount() + " << "+ matricCalculator.getTotalWordCount() +">> "+ matricCalculator.getTotalCharCount());
-
 		try {
-			// BufferedWriter writerMetrics = new BufferedWriter(
-			// new FileWriter("C:\\Users\\Anand\\Pictures\\DP\\MILINDMetricsOutput.txt"));
+
 			fileWriter
 					.write("AVG_NUMBER_WORDS_PER_SENTENCE = "
 							+ String.format("%.2f",
@@ -67,11 +81,16 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 							+ "\n");
 			fileWriter.write("MAX_FREQ_WORD = " + matricCalculator.getMaxFreqWord() + "\n");
 			fileWriter.write("LONGEST_WORD = " + matricCalculator.getLongestWord());
-			// fileWriter.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
+
+	@Override
+	public String toString() {
+		return "Results [file=" + file + ", fileWriter=" + fileWriter + "]";
+	}
+
 }

@@ -13,46 +13,63 @@ public class FileProcessor {
 	public FileProcessor() {
 	}
 
+	/**
+	 * @param fName incoming file name this method will open fName file
+	 */
 	public void fileOpen(String fName) {
-		// String fileName="C:\\Users\\Anand\\Pictures\\DP\\" + fName;
-
 		file = new File(fName);
 		try {
 			fileReader = new BufferedReader(new FileReader(file));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Error: file not found. Please enter correct file name as input.txt");
+			System.exit(0);
 		}
 	}
 
+	/**
+	 * In this method, will read character till period and if there is any invalid
+	 * character then will stop further reading and return string as error
+	 * 
+	 * @return whatever read till period will be returned
+	 */
 	public String readSentence() {
 		int readChar = 0;
 		String readSentence = "";
 		try {
 			while ((readChar = fileReader.read()) != -1) {
 				readSentence += (char) readChar;
+				if (!WordPlayValidator.isCharValid(readChar)) {
+					return "error";
+				}
 				if ((char) readChar == '.') {
 					return readSentence;
-					// SentenceProcessor sentenceProcessor = new SentenceProcessor();
-					// Results results = new Results();
-					// String temp=sentenceProcessor.processSentence(readSentence);
-					// System.out.print(temp);
-					// readSentence="";
 				}
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "";
+		return readSentence;
 	}
 
+	/**
+	 * Closes the stream and releases any system resources associated with
+	 * fileReader.
+	 */
 	public void fileClose() {
 		try {
 			fileReader.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(0);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "FileProcessor [file=" + file + ", fileReader=" + fileReader + "]";
+	}
+
 }

@@ -4,73 +4,93 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MatricCalculator {
+
+	/**
+	 * countWord is to keep count of number of words in a file
+	 */
 	private static int countWord = 0;
+	/**
+	 * countChar is to keep count number of characters in a file
+	 */
 	private static int countChar = 0;
-	private static String longestWord = "";
+	/**
+	 * countSen is to keep count of sentences in a file
+	 */
 	private static int countSen = 0;
+	/**
+	 * map is for to store word and its frequency
+	 */
 	private static Map<String, Integer> map = new HashMap<String, Integer>();
 
-	public int getAvgNumOfWordsPerSen() {
-		return countWord / countSen;
-	}
-
+	/**
+	 * @return it will return total words count
+	 */
 	public int getTotalWordCount() {
 		return countWord;
 	}
 
+	/**
+	 * @return it will return total chars count
+	 */
 	public int getTotalCharCount() {
 		return countChar;
 	}
 
+	/**
+	 * @return it will return total sentences count
+	 */
 	public int getTotalSenCount() {
 		return countSen;
 	}
 
+	/**
+	 * this method is to keep count of sentences whenever below method gets called
+	 * sentence counter gets increased by one
+	 */
 	public void sentenceCounter() {
 		this.countSen++;
 	}
 
-	public int getAvgNumOfCharsPerSen() {
-		return countChar / countSen;
-	}
+	/*
+	 * public int getAvgNumOfCharsPerSen() { return countChar / countSen; }
+	 */
 
+	/**
+	 * @param sentence incoming sentence below method is to store words in map and
+	 *                 count words and to call other methods
+	 */
 	public void matrixCalProcess(String sentence) {
 		charCount(sentence);
-		// TODO Auto-generated method stub
-
-		// charCount(s);
 		String words[] = sentence.split(" ");
-		// countChar += s.length();
 		countWord += words.length;
-		// String reversedStr = "";
 		for (int i = 0; i < words.length; i++) {
 			String word = words[i];
-			// String temp1 = "";
 			if (word.contentEquals("")) {
 				countWord -= 1;
 				continue;
 			}
-			// temp1 = reverse(word);
-			// longestWord(word);
 			storeWordsInMap(word);
-
 		}
-		// return reversedStr;
-
 	}
 
+	/**
+	 * @param s incoming sentence below method to calculate number of characters in
+	 *          sentence and also it will check whether character is valid or not
+	 */
 	private static void charCount(String s) {
 		for (int i = 0; i < s.length(); i++) {
 			if (isCharValid(s, i)) {
-				// System.out.print(s.charAt(i));
 				countChar++;
 			}
 		}
 	}
 
+	/**
+	 * @return below method will return maximum frequency word
+	 */
 	public String getMaxFreqWord() {
 
-		int maxValInMap = 0; // This will return max value in the Hashmap
+		int maxValInMap = 0;
 		String mKey = null;
 		for (String key : map.keySet()) {
 			if (map.get(key) > maxValInMap) {
@@ -79,26 +99,29 @@ public class MatricCalculator {
 			}
 		}
 		return mKey;
-
-		// return "";
 	}
 
+	/**
+	 * @return below method will return longest word
+	 */
 	public String getLongestWord() {
 
-		String longestWord = ""; // This will return max value in the Hashmap
-		// String mKey = null;
+		String longestWord = "";
+
 		for (String key : map.keySet()) {
 			if (key.length() > longestWord.length()) {
 				longestWord = key;
-				/// mKey = key;
 			}
 		}
 		return longestWord;
 
-		// return "";
 	}
 
-	public static void storeWordsInMap(String s) {
+	/**
+	 * @param s incoming word below method is to store words and its frequency in
+	 *          HashMap
+	 */
+	private static void storeWordsInMap(String s) {
 		if (s.contains(".")) {
 			s = s.substring(0, s.length() - 1);
 		}
@@ -108,10 +131,21 @@ public class MatricCalculator {
 			map.put(s, 1);
 	}
 
+	/**
+	 * @param s incoming sentence
+	 * @param i index of character in sentence
+	 * @return it will return true if character satisfies below conditions else
+	 *         false
+	 */
 	private static boolean isCharValid(String s, int i) {
 		return (s.charAt(i) >= 65 && s.charAt(i) <= 90) || (s.charAt(i) >= 97 && s.charAt(i) <= 122)
 				|| (s.charAt(i) >= 48 && s.charAt(i) <= 57)
 				|| (s.charAt(i) == ' ' || s.charAt(i) == '.' || s.charAt(i) == ' ') || (s.charAt(i) == '\n');
+	}
+
+	@Override
+	public String toString() {
+		return "MatricCalculator []";
 	}
 
 }
