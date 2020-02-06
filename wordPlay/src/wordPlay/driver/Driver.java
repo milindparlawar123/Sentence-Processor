@@ -14,11 +14,7 @@ import wordPlay.validator.DriverValidator;
 public class Driver {
 	public static void main(String[] args) {
 
-		/*
-		 * As the build.xml specifies the arguments as argX, in case the argument value
-		 * is not given java takes the default value specified in build.xml. To avoid
-		 * that, below condition is used
-		 */
+		//below try block to validate arguments
 		try {
 			new DriverValidator(args.length, args);
 		} catch (Exception e) {
@@ -27,6 +23,11 @@ public class Driver {
 		} finally {
 
 		}
+		/*
+		 * As the build.xml specifies the arguments as argX, in case the argument value
+		 * is not given java takes the default value specified in build.xml. To avoid
+		 * that, below condition is used
+		 */
 		/*
 		 * if ((args.length != 3) || (args[0].equals("${arg0}")) ||
 		 * (args[1].equals("${arg1}")) || (args[2].equals("${arg2}"))) { System.err.
