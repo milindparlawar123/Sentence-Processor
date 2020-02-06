@@ -6,7 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * @author Milind below class is to write reversed sentences to output file. And
+ * @author Milind 
+ *         below class is to write reversed sentences to output file. And
  *         AVG_NUMBER_WORDS_PER_SENTENCE, AVG_NUM_CHARS_PER_SENTENCE,
  *         MAX_FREQ_WORD and LONGEST_WORD to metrics file.
  *
@@ -23,12 +24,12 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 	 *              present then it will create new file with name fName
 	 */
 	@Override
-	public void fileOpen(String fName) {
+	public void openFile(String fName) {
 		file = new File(fName);
 		try {
 			fileWriter = new BufferedWriter(new FileWriter(file));
 
-		} catch (IOException e) { // TODO Auto-generated catch block
+		} catch (IOException e) {
 			System.err.println(Constants.ERROR_OPENING_FILE);
 			e.printStackTrace();
 			System.exit(0);
@@ -47,7 +48,6 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 		try {
 			fileWriter.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.err.print(Constants.ERROR_CLOSING_FILE);
 			e.printStackTrace();
 			System.exit(0);
@@ -65,8 +65,7 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 		try {
 			fileWriter.write(s);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.err.println("exception occured while writing to the file");
+			System.err.println(Constants.ERROR_WRITING_FILE);
 			e.printStackTrace();
 			System.exit(0);
 		} finally {
@@ -99,8 +98,7 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 			fileWriter.write(Constants.MAX_FREQ_WORD + " = " + matricCalculator.getMaxFreqWord() + Constants.NEW_LINE);
 			fileWriter.write(Constants.LONGEST_WORD + " = " + matricCalculator.getLongestWord());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.err.println("exception occured while writing to the file");
+			System.err.println(Constants.ERROR_WRITING_FILE);
 			e.printStackTrace();
 			System.exit(0);
 		} finally {

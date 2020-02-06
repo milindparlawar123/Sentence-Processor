@@ -1,7 +1,8 @@
 package wordPlay.util;
 
 /**
- * @author Milind This class is to process sentence
+ * @author Milind 
+ *         This class is to process sentence
  *
  */
 public class SentenceProcessor {

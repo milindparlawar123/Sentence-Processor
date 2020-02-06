@@ -16,7 +16,7 @@ public class MatricCalculator {
 	 */
 	private static int countWord = 0;
 	/**
-	 * countChar is to keep count number of characters in a file
+	 * countChar is to keep count of number of characters in a file
 	 */
 	private static int countChar = 0;
 	/**
@@ -54,7 +54,7 @@ public class MatricCalculator {
 	 * sentence counter gets increased by one
 	 */
 	public void sentenceCounter() {
-		this.countSen++;
+		countSen++;
 	}
 
 	/*

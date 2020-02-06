@@ -17,12 +17,11 @@ public class FileProcessor {
 	 * @param fName incoming file name this method will open fName file
 	 * @throws ExceptionHandler
 	 */
-	public void fileOpen(String fName) {
+	public void openFile(String fName) {
 		file = new File(fName);
 		try {
 			fileReader = new BufferedReader(new FileReader(file));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.err.println(Constants.ERROR_OPENING_FILE);
 			e.printStackTrace();
 			System.exit(0);
@@ -65,7 +64,6 @@ public class FileProcessor {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.err.println(Constants.ERROR_READING_FILE);
 			e.printStackTrace();
 			System.exit(0);
@@ -85,7 +83,6 @@ public class FileProcessor {
 		try {
 			fileReader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.err.print(Constants.ERROR_CLOSING_FILE);
 			e.printStackTrace();
 			System.exit(0);

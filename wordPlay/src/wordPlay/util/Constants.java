@@ -1,7 +1,8 @@
 package wordPlay.util;
 
 /**
- * @author Milind this class contains all constant which can be used across
+ * @author Milind. 
+ * This class contains all constant which can be used across
  *         application
  */
 public class Constants {

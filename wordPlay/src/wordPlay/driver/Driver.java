@@ -5,7 +5,7 @@ import wordPlay.util.FileProcessor;
 import wordPlay.util.Results;
 import wordPlay.util.SentenceProcessor;
 import wordPlay.util.WordPlayValidator;
-import wordPlay.validator.DriverPojo;
+import wordPlay.validator.DriverValidator;
 
 /**
  * @author John Doe
@@ -20,9 +20,8 @@ public class Driver {
 		 * that, below condition is used
 		 */
 		try {
-			new DriverPojo(args.length, args);
+			new DriverValidator(args.length, args);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.exit(0);
 		} finally {
@@ -36,14 +35,14 @@ public class Driver {
 		 */
 		FileProcessor fileProcessor = new FileProcessor();
 
-		fileProcessor.fileOpen(args[0]);
+		fileProcessor.openFile(args[0]);
 		if (fileProcessor.isFileEmpty()) {
 			System.err.print(Constants.ERROR_EMPTY_FILE);
 			System.exit(0);
 		}
 		String sentence = null;
 		Results results = new Results();
-		results.fileOpen(args[1]);
+		results.openFile(args[1]);
 
 		while ((sentence = fileProcessor.readSentence()) != "") {
 			if (WordPlayValidator.isStringValid(sentence) && sentence.equals(Constants.ERROR)) {
@@ -54,13 +53,12 @@ public class Driver {
 			String reversedSentence = sentenceProcessor.processSentence(sentence);
 
 			results.writeToFile(reversedSentence);
-
 		}
 
 		fileProcessor.fileClose();
 		results.fileClose();
 
-		results.fileOpen(args[2]);
+		results.openFile(args[2]);
 		results.writeToFile();
 		results.fileClose();
 
