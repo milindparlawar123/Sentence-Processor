@@ -36,10 +36,10 @@ Note: Arguments accept the absolute path of the files.
  Flow of the project:
   1. Driver class takes 3 arguments as input file name, output file name and metrics file name.
   2.Validator classes validates whether all inputs files provided or not
-  3.After that FileProcessor class starts opening the file if it is valid else throws exception and starts to read content of file till     period.
+  3.After that FileProcessor class starts opening the file if it is valid else throws exception and starts to read content of file till period.
   4.SentenceProcessor takes sentence as input from FileProcessor and starts processing like reversing words
-  5.MatricCalculator takes sentence as input from SsntenceProcessor to process further like sentences counting, words counting and chars     counting.
-  6.Results class is to write reversed sentences to output file and AVG_NUMBER_WORDS_PER_SENTENCE,AVG_NUM_CHARS_PER_SENTENCE,               MAX_FREQ_WORD and LONGEST_WORD to metrics file
+  5.MatricCalculator takes sentence as input from SsntenceProcessor to process further like sentences counting, words counting and chars counting.
+  6.Results class is to write reversed sentences to output file and AVG_NUMBER_WORDS_PER_SENTENCE,AVG_NUM_CHARS_PER_SENTENCE,      MAX_FREQ_WORD and LONGEST_WORD to metrics file
  
  Note: I am reading chars till period as sentence. Sentence can have new line character and it will be considered as one sentence.
  
