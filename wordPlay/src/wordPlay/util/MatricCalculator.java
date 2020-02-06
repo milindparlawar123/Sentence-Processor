@@ -3,6 +3,12 @@ package wordPlay.util;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Milind
+ * below class is to calculate number of 
+ * words, chars and sentences
+ *
+ */
 public class MatricCalculator {
 
 	/**
@@ -69,7 +75,7 @@ public class MatricCalculator {
 				countWord -= 1;
 				continue;
 			}
-			storeWordsInMap(word);
+			storeWordsInMap(word.toLowerCase());
 		}
 	}
 

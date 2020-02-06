@@ -15,6 +15,7 @@ public class FileProcessor {
 
 	/**
 	 * @param fName incoming file name this method will open fName file
+	 * @throws ExceptionHandler
 	 */
 	public void fileOpen(String fName) {
 		file = new File(fName);
@@ -22,9 +23,25 @@ public class FileProcessor {
 			fileReader = new BufferedReader(new FileReader(file));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.err.println("Error: file not found. Please enter correct file name as input.txt");
+			System.err.println(Constants.ERROR_OPENING_FILE);
+			e.printStackTrace();
 			System.exit(0);
+
+		} finally {
+
 		}
+	}
+
+	/**
+	 * @return to check whether file is empty or not if empty it will return true
+	 *         else false
+	 */
+	public boolean isFileEmpty() {
+
+		if (this.file.length() == 0) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -32,6 +49,7 @@ public class FileProcessor {
 	 * character then will stop further reading and return string as error
 	 * 
 	 * @return whatever read till period will be returned
+	 * @throws ExceptionHandler
 	 */
 	public String readSentence() {
 		int readChar = 0;
@@ -40,7 +58,7 @@ public class FileProcessor {
 			while ((readChar = fileReader.read()) != -1) {
 				readSentence += (char) readChar;
 				if (!WordPlayValidator.isCharValid(readChar)) {
-					return "error";
+					return Constants.ERROR;
 				}
 				if ((char) readChar == '.') {
 					return readSentence;
@@ -48,7 +66,11 @@ public class FileProcessor {
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.err.println(Constants.ERROR_READING_FILE);
 			e.printStackTrace();
+			System.exit(0);
+		} finally {
+
 		}
 		return readSentence;
 	}
@@ -56,14 +78,20 @@ public class FileProcessor {
 	/**
 	 * Closes the stream and releases any system resources associated with
 	 * fileReader.
+	 * 
+	 * @throws ExceptionHandler
 	 */
 	public void fileClose() {
 		try {
 			fileReader.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.err.print(Constants.ERROR_CLOSING_FILE);
 			e.printStackTrace();
 			System.exit(0);
+
+		} finally {
+
 		}
 	}
 

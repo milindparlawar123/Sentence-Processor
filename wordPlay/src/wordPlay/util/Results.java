@@ -5,6 +5,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * @author Milind below class is to write reversed sentences to output file. And
+ *         AVG_NUMBER_WORDS_PER_SENTENCE, AVG_NUM_CHARS_PER_SENTENCE,
+ *         MAX_FREQ_WORD and LONGEST_WORD to metrics file.
+ *
+ */
 public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 	private File file;
 	private BufferedWriter fileWriter;
@@ -23,8 +29,11 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 			fileWriter = new BufferedWriter(new FileWriter(file));
 
 		} catch (IOException e) { // TODO Auto-generated catch block
+			System.err.println(Constants.ERROR_OPENING_FILE);
 			e.printStackTrace();
 			System.exit(0);
+		} finally {
+
 		}
 
 	}
@@ -39,7 +48,11 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 			fileWriter.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.err.print(Constants.ERROR_CLOSING_FILE);
 			e.printStackTrace();
+			System.exit(0);
+		} finally {
+
 		}
 	}
 
@@ -53,8 +66,11 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 			fileWriter.write(s);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.err.println("exception occured while writing to the file");
 			e.printStackTrace();
 			System.exit(0);
+		} finally {
+
 		}
 
 	}
@@ -63,6 +79,7 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 	 * this method is to write AVG_NUMBER_WORDS_PER_SENTENCE ,
 	 * AVG_NUM_CHARS_PER_SENTENCE, MAX_FREQ_WORD and LONGEST_WORD to metrics output
 	 * file
+	 * @throws ExceptionHandler 
 	 */
 	@Override
 	public void writeToFile() {
@@ -70,20 +87,24 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 		try {
 
 			fileWriter
-					.write("AVG_NUMBER_WORDS_PER_SENTENCE = "
-							+ String.format("%.2f",
+					.write(Constants.AVG_NUMBER_WORDS_PER_SENTENCE + " = "
+							+ String.format(Constants.ROUND_TO_TWO_DECIMAL,
 									(float) matricCalculator.getTotalWordCount() / matricCalculator.getTotalSenCount())
-							+ "\n");
+							+ Constants.NEW_LINE);
 			fileWriter
-					.write("AVG_NUM_CHARS_PER_SENTENCE = "
-							+ String.format("%.2f",
+					.write(Constants.AVG_NUM_CHARS_PER_SENTENCE + " = "
+							+ String.format(Constants.ROUND_TO_TWO_DECIMAL,
 									(float) matricCalculator.getTotalCharCount() / matricCalculator.getTotalSenCount())
-							+ "\n");
-			fileWriter.write("MAX_FREQ_WORD = " + matricCalculator.getMaxFreqWord() + "\n");
-			fileWriter.write("LONGEST_WORD = " + matricCalculator.getLongestWord());
+							+ Constants.NEW_LINE);
+			fileWriter.write(Constants.MAX_FREQ_WORD + " = " + matricCalculator.getMaxFreqWord() + Constants.NEW_LINE);
+			fileWriter.write(Constants.LONGEST_WORD + " = " + matricCalculator.getLongestWord());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.err.println("exception occured while writing to the file");
 			e.printStackTrace();
+			System.exit(0);
+		} finally {
+
 		}
 
 	}

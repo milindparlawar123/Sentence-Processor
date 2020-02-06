@@ -18,6 +18,7 @@ public class SentenceProcessor {
 		String reversedSentence = "";
 		MatricCalculator matricCalculator = new MatricCalculator();
 		matricCalculator.sentenceCounter();
+		//\r\n for windows and \n for Linux OS
 		if (sentence.contains("\r\n") || sentence.contains("\n")) {
 			String[] list = null;
 			if (sentence.contains("\r\n"))
@@ -74,7 +75,7 @@ public class SentenceProcessor {
 	private static String reverseWord(String word) {
 		String reversedWord = "";
 		for (int j = word.length() - 1; j >= 0; j--) {
-			int c = word.charAt(j);
+			//int c = word.charAt(j);
 			reversedWord = reversedWord + word.charAt(j);
 		}
 		return reversedWord;
